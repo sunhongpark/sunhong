@@ -9,7 +9,10 @@ public class quiz16 {
 			return;
 		}
 		if(i==1)
+		{
 			System.out.println("b");
+			return;
+		}
 		else
 		{
 		 Re(i-1); 
@@ -18,6 +21,6 @@ public class quiz16 {
 	}
 	public static void main(String[] args)
 	{
-		Re(10);
+		Re(8);
 	}
 }
