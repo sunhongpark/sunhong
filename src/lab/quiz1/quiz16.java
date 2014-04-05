@@ -21,6 +21,6 @@ public class quiz16 {
 	}
 	public static void main(String[] args)
 	{
-		Re(8);
+		Re(7);
 	}
 }
