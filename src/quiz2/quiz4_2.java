@@ -18,5 +18,8 @@ public class quiz4_2 {
 			System.out.print("사각형이 겹칩니다.");
 			}
 		}
+		else{
+			System.out.println("겹치지 않아요.");
+		}
 	}
 }

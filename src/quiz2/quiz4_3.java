@@ -8,6 +8,9 @@ public class quiz4_3 {
 		Scanner scan =new Scanner(System.in);
 		System.out.println("0보다 큰 정수를 입력하세요");
 		num = scan.nextInt();
+		if(num<=0){
+			return;
+		}
 		while(num!=1)
 		{
 			x=num%2;
