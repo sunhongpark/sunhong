@@ -14,17 +14,27 @@ class Add extends Calcu{
 		return x+y;
 	}
 }
-class Sub{
+class Sub extends Calcu{
+	public int calcuate(){
+		return x-y;
+	}
 	
 }
-class Mul{
+class Mul extends Calcu{
+	public int calcuate(){
+		return x*y;
+	}
 	
 }
-class Div{
+class Div extends Calcu{
+	public int calcuate(){
+		return x/y;
+	}
 	
 }
 public class quiz3_4 {
 	public static void main(String[] args){
+		Calcu ca;
 		int x,y;
 		char op;
 		String ch;
@@ -35,7 +45,30 @@ public class quiz3_4 {
 			y=scan.nextInt();
 			ch=scan.next();
 			op=ch.charAt(0);
-			System.out.print(x+op+y);
+			switch(op){
+			case '+' :
+				ca=new Add();
+				ca.setValue(x,y);
+				System.out.println("값 : "+ca.calcuate());
+				break;
+			case '-' :
+				ca=new Sub();
+				ca.setValue(x,y);
+				System.out.println("값 : "+ca.calcuate());
+				break;
+			case '*' :
+				ca=new Mul();
+				ca.setValue(x,y);
+				System.out.println("값 : "+ca.calcuate());
+				break;
+			case '/' :
+				ca=new Div();
+				ca.setValue(x,y);
+				System.out.println("값 : "+ca.calcuate());
+				break;
+				default:
+					System.out.println("연산자 입력 오류");
+			}
 		}
 		catch(Exception e){
 			System.out.println("순서대로 입력하시오!");
