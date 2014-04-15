@@ -1,18 +1,26 @@
 package quiz3;
-class Map{
-	static final int width=15,len=20;
-	static char map[][] = new char[len][width];
-	static int x_pos,y_pos,num=0;
+abstract class Map{
+	protected static final int width=15,len=15;
+	protected static char map[][] = new char[len][width];
+	protected static int x_pos,y_pos,num=0;
 	public Map(){
 		for(int i=0;i<map.length;i++)
 		{
 			for(int j=0;j<map[0].length;j++){
 				map[i][j]='.';
 			}
-			x_pos=map[0].length/2;
-			y_pos=map.length/2;
-			map[y_pos][x_pos]='@';
 		}
+		x_pos=map[0].length/2;
+		y_pos=map.length/2;
+		map[y_pos][x_pos]='@';
+	}
+	public Map(int x){
+		this();
+		for(int i=2;i<10;i++)
+			map[i][i]='X';
+		if(map[y_pos][x_pos]=='X')
+			x_pos++;
+		map[y_pos][x_pos]='@';
 	}
 	public void show(){
 		for(int i=0;i<map.length;i++)
@@ -31,6 +39,12 @@ class Map{
 class Game extends Map{
 	private double r;
 	static int count=0;
+	public Game(){
+		super();
+	}
+	public Game(int x){
+		super(x);
+	}
 	public void move(){
 		r=Math.random();
 		if(r<0.25){
@@ -74,12 +88,12 @@ class Game extends Map{
 				set(x_pos,y_pos+1);
 		}
 		map[y_pos][x_pos]='@';
-		if(count>20)
+		if(count==20)
 			map[y_pos][x_pos]='*';
 		count++;
 	}
 	public boolean GameOver(){
-		if(count<22)
+		if(count<21)
 			return true;
 		return false;
 	}
