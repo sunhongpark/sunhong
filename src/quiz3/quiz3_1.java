@@ -4,7 +4,7 @@ public class quiz3_1 {
 		char c;
 		for(int i=0;i<ch.length();i++){
 			c=ch.charAt(i);
-			if(!(Character.isDigit(c))){
+			if(!(Character.isDigit(c))){//문자열을 한개씩 쪼개어서 int형이 될수 있는지 확인
 				return false;
 			}
 		}

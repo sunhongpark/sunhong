@@ -1,17 +1,17 @@
 package quiz3;
 import java.util.Scanner;
-abstract class seat{
-	public String customer[] =new String[10];
-	public String nul="___";
-	public static int pos;
+abstract class seat{//추상 클래스 seat
+	public String customer[] =new String[10];//좌석 10개
+	public String nul="___";//빈좌석
+	public static int pos;//사용자가 선택한 위치를 저장하는 static 변수
 	public seat(){
 		for(int i=0;i<customer.length;i++)
 			customer[i]="___";
 	}
 	public boolean scan(String name){
 		for(int i=0;i<customer.length;i++){
-			if(customer[i].compareTo(name)==0){
-				pos=i;
+			if(customer[i].compareTo(name)==0){//문자열 비교
+				pos=i;//찾은 자리의 인덱스 저장
 				return true;
 			}
 		}
@@ -20,19 +20,19 @@ abstract class seat{
 	}
 	public void cancel(String name){
 		if(scan(name)){
-			customer[pos]="___";
+			customer[pos]="___";//좌석 초기화
 		}
 		else{
 			System.out.println("없는 이름 입니다.");
 		}
 	}
 	public void reservation(int x,String name){
-		if(x>10||x<1)
+		if(x>10||x<1)//범위가 초과시 true
 		{
 			System.out.println("없는 자리 입니다.");
 			return;
 		}
-		if(customer[x-1].compareTo(nul)==0){
+		if(customer[x-1].compareTo(nul)==0){//빈자리이면 예약
 			customer[x-1]=name;
 		}
 		else{
@@ -41,7 +41,7 @@ abstract class seat{
 	}
 	abstract public void Print();
 }
-class S extends seat{
+class S extends seat{//S좌석
 	public void Print(){
 		System.out.print("S>>");
 		for(int i=0;i<customer.length;i++){
@@ -50,7 +50,7 @@ class S extends seat{
 		System.out.print("\n");
 	}
 }
-class A extends seat{
+class A extends seat{//A좌석
 	public void Print(){
 		System.out.print("A>>");
 		for(int i=0;i<customer.length;i++){
@@ -59,7 +59,7 @@ class A extends seat{
 		System.out.print("\n");
 	}
 }
-class B extends seat{
+class B extends seat{//B좌석
 	public void Print(){
 		System.out.print("B>>");
 		for(int i=0;i<customer.length;i++){

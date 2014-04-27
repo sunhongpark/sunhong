@@ -1,8 +1,8 @@
 package quiz3;
-abstract class Map{
-	protected static final int width=15,len=15;
-	protected static char map[][] = new char[len][width];
-	protected static int x_pos,y_pos,num=0;
+abstract class Map{//추상 클래스 map 생성
+	protected static final int width=15,len=15; // fianl로 처음에 map의 크기 지정 
+	protected static char map[][] = new char[len][width];//map  생성
+	protected static int x_pos,y_pos,num=0;//static 형태의 좌표 변수 
 	public Map(){
 		for(int i=0;i<map.length;i++)
 		{
@@ -12,7 +12,9 @@ abstract class Map{
 		}
 		x_pos=map[0].length/2;
 		y_pos=map.length/2;
+		//중앙부터 시작
 		map[y_pos][x_pos]='@';
+		//map초기화 
 	}
 	public Map(int x){
 		this();
@@ -21,8 +23,9 @@ abstract class Map{
 		if(map[y_pos][x_pos]=='X')
 			x_pos++;
 		map[y_pos][x_pos]='@';
+		//문제 5번에서 사용
 	}
-	public void show(){
+	public void show(){//map의 상태 출력
 		for(int i=0;i<map.length;i++)
 		{
 			for(int j=0;j<map[0].length;j++){
@@ -34,24 +37,25 @@ abstract class Map{
 	public void set(int x, int y){
 		x_pos=x;
 		y_pos=y;
+		//변수 값 변경
 	}
 }
-class Game extends Map{
-	private double r;
-	static int count=0;
+class Game extends Map{//map을 상속 받은 game 생성
+	private double r;//랜덤변수를 저장할 r생성
+	static int count=0;//카운트 변수
 	public Game(){
-		super();
+		super();//슈퍼 클래스 호출
 	}
 	public Game(int x){
 		super(x);
 	}
 	public void move(){
-		r=Math.random();
+		r=Math.random();//랜덤함수의 값에 따라 움직임
 		if(r<0.25){
-			if(Esc(x_pos+1,y_pos))
+			if(Esc(x_pos+1,y_pos))//캐릭터가 map밖으로 나가는지 체크
 			{
 				map[y_pos][x_pos]='*';
-				count=22;
+				count=22;//나갔다면 *로 표시후 카운터를 올려줌
 				return;
 			}
 			if(map[y_pos][x_pos+1]=='.')
@@ -93,11 +97,11 @@ class Game extends Map{
 		count++;
 	}
 	public boolean GameOver(){
-		if(count<21)
+		if(count<21)//카운터가 22이상이면 게임 종료
 			return true;
 		return false;
 	}
-	public boolean Esc(int x, int y){
+	public boolean Esc(int x, int y){//탈출햇는지 확인
 		if((x<0||x>=width)||(y<0||y>=len)){
 			return true;
 		}

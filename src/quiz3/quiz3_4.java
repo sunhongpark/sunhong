@@ -1,6 +1,6 @@
 package quiz3;
 import java.util.Scanner;
-abstract class Calcu{
+abstract class Calcu{//추상클래스 생성
 	int x;
 	int y;
 	public void setValue(int x,int y){
@@ -9,24 +9,24 @@ abstract class Calcu{
 	}
 	abstract int calcuate();
 }
-class Add extends Calcu{
+class Add extends Calcu{//덧셈
 	public int calcuate(){
 		return x+y;
 	}
 }
-class Sub extends Calcu{
+class Sub extends Calcu{//뺄셈
 	public int calcuate(){
 		return x-y;
 	}
 	
 }
-class Mul extends Calcu{
+class Mul extends Calcu{//곱셈
 	public int calcuate(){
 		return x*y;
 	}
 	
 }
-class Div extends Calcu{
+class Div extends Calcu{//나눗셈
 	public int calcuate(){
 		return x/y;
 	}
@@ -36,7 +36,7 @@ public class quiz3_4 {
 	public static void main(String[] args){
 		Calcu ca;
 		int x,y;
-		char op;
+		char op;//연산자 저장
 		String ch;
 		Scanner scan =new Scanner(System.in);
 		System.out.print("두 정수와 연산자를 입력하시오 : ");
@@ -47,7 +47,7 @@ public class quiz3_4 {
 			op=ch.charAt(0);
 			switch(op){
 			case '+' :
-				ca=new Add();
+				ca=new Add();//업 캐스팅
 				ca.setValue(x,y);
 				System.out.println("값 : "+ca.calcuate());
 				break;
