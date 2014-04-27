@@ -1,6 +1,6 @@
 package lab.chapter5;
 import java.util.Scanner;
-abstract class printer{
+abstract class printer{//추상 클래스 프린트
 	String model;
 	String company;
 	int paper;
@@ -11,19 +11,20 @@ abstract class printer{
 	public printer(String model,String company){
 		this.model=model;
 		this.company=company;
-		paper=2;
+		paper=20;
 		interF=1;
+		//초기화
 	}
-	abstract void print();
-	public void SetInterF(int interF){
+	abstract void print();//프린트 방식은 프린트마다 다르게
+	public void SetInterF(int interF){//연결방식 설정
 		if(interF>2||interF<1){
 			System.out.println("잘못된 연결 방식");
 			return;
 		}
 		this.interF=interF;
 		}
-	public void AddPaper(int paper){this.paper+=paper;}
-	public void Pdata(){
+	public void AddPaper(int paper){this.paper+=paper;}//용지 추가
+	public void Pdata(){//프린터 정보 확인
 		System.out.println("모델명 : "+model+"\n회사명 : "+company);
 		if(interF==1)
 			System.out.println("연결 종류 : USB");
@@ -32,10 +33,10 @@ abstract class printer{
 		System.out.println("종이량 : "+paper);
 	}
 }
-class InkPrinter extends printer{
+class InkPrinter extends printer{//잉크 프린터 클래스 생성
 	int ink;
 	public InkPrinter(String model,String company){
-		super(model,company);
+		super(model,company);//슈퍼클래스 생성자 호출
 		ink=100;
 	}
 	public void print(){
@@ -47,20 +48,23 @@ class InkPrinter extends printer{
 			System.out.println("종이가 부족합니다.");
 			return;
 		}
+		//종이나 잉크가 부족할때 종료
 		ink--;
 		paper--;
+		//프린트할때마다 잉크와 종이가 1개씩 감소
 		System.out.println(model+"\n남은 잉크양 : "+ink+"\n종이 잔량 : "+paper);
 	}
-	public void AddInk(int ink){this.ink+=ink;}
-	public void ExtraInk(){
+	public void AddInk(int ink){this.ink+=ink;}//잉크 충전
+	public void ExtraInk(){//남은 잉크양 출력
 		System.out.println("남은 잉크양: "+ink);
 	}
 	public void Pdata(){
 		super.Pdata();
 		this.ExtraInk();
+		//프린트 정보 출력
 	}
 }
-class LaserPrinter extends printer{
+class LaserPrinter extends printer{//레이저 프린터 클래스 생성
 	int toner;
 	public LaserPrinter(String model,String company){
 		super(model,company);
@@ -104,10 +108,11 @@ public class problem1 {
 			p.AddPaper(num);
 			break;
 		case 3:
-				p.AddInk(80);
+				p.AddInk(80);//잉크는 80씩 충전
 			break;
 		case 4:
 			p.Pdata();
+			break;
 		case 5:
 			System.out.print("연결 방식 선택 (1) USB (2) 병렬 인터페이스");
 			num=scan.nextInt();
@@ -136,6 +141,7 @@ public class problem1 {
 			break;
 		case 4:
 			p.Pdata();
+			break;
 		case 5:
 			System.out.print("연결 방식 선택 (1) USB (2) 병렬 인터페이스");
 			num=scan.nextInt();

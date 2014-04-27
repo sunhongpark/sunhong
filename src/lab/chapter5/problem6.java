@@ -31,7 +31,7 @@ public class problem6 {
 		p=s;
 		while(p.next != null){
 			p=p.next;
-		}
+		}//가장 끝까지 이동
 		switch(num){
 		case 1:
 			Dobject l =new line();
@@ -52,7 +52,7 @@ public class problem6 {
 			return;
 		do{
 			p=p.next;
-			p.draw();
+			p.draw();//출력
 		}while(p.next!=null);
 		System.out.print("\n");
 	}
@@ -63,7 +63,7 @@ public class problem6 {
 			d=p;
 			p=p.next;
 		}
-		if(d!=p)
+		if(d!=p)//만약 값이 하나도 없으면 지우지 않음
 			d.next=null;
 	}
 	public static void main(String[] args){

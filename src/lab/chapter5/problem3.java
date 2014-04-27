@@ -10,24 +10,24 @@ class StringStack implements Stack{
 	public String[] st;
 	
 	public StringStack(int x){
-		st = new String[x];
+		st = new String[x];//생성자로 문자열저장 공간 초기화
 		num=0;
 	}
 	public int length(){
-		return st.length;
+		return st.length;//개수 리턴
 	}
 	public Object pop(){
-		if(num==0)
+		if(num==0)//개수가 0개이면 pop을 못함
 			return null;
 		else
-			num--;
+			num--;//값 출력
 		return st[num];
 		
 	}
 	public boolean push(Object ob) {
 		if(st.length>num){
 			st[num++]=(String)ob;
-			return true;
+			return true;//저장
 		}
 		else return false;
 	}

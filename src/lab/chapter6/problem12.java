@@ -7,13 +7,13 @@ class person{
 		y=(int)Math.round(Math.random()*10%3);
 		z=(int)Math.round(Math.random()*10%3);
 	}
-	public void random(){
+	public void random(){//랜덤값 생성
 		x=(int)Math.round(Math.random()*10%3);
 		y=(int)Math.round(Math.random()*10%3);
 		z=(int)Math.round(Math.random()*10%3);
 	}
 	public boolean find(int x,int y,int z){
-		if(this.x==x&&this.y==y&&this.z==z){
+		if(this.x==x&&this.y==y&&this.z==z){//값확인후 결과 리턴
 			System.out.println("승리 ("+x+","+y+","+z+")");
 			return true;
 		}
