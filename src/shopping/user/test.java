@@ -1,7 +1,11 @@
 package shopping.user;
 import java.util.*;
 /*
- * 
+ * 판매자관련은 아직 물품 페키지를 구현 하지 않아 정확히 구현 하지 않음 차후 수정예정
+ * 현제 구상중인 쇼핑몰은 옥션과 같은 느낌의 쇼핑몰
+ * 다수의 사용자가 이용하며 다수의 판매자가 존재하고 그것을 관리하는 각각의 매니져가 존재
+ * 그 매니져를 이용하여 admin이 사용자를 관리하는 형태의 user패키지를 구상중.
+ * 사용자 등급은 따로 클래스로 만들지 않고 각 클래스 안에 속성으로 저장.
  */
 public class test {
 	static Scanner scan=new Scanner(System.in);
