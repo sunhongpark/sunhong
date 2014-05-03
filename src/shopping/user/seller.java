@@ -14,10 +14,10 @@ public class seller<T> extends user{
 	public void AddsProduct(Object ob){
 		product.add((T)ob);
 	}
-	public void showProduct(){
+	public void ShowProduct(){
 		//미구현 상품의 자세한 정보 출력
 	}
-	public void removeProduct(int i){
+	public void RemoveProduct(int i){
 		product.remove(i-1);
 	}
 

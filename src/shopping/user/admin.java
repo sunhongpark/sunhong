@@ -4,10 +4,16 @@ import shopping.user.*;
 
 public class admin extends user{
 	//
+	Cmanager c;
+	Smanager s;
 	admin(String id, String pw, String name, String ph, String address) {
 		super(id, pw, name, ph, address);
 	}
-	 public boolean changetype(int i,user u){
+	public void SetAdmin(Cmanager c,Smanager s){
+		this.c=c;
+		this.s=s;
+	}
+	 public boolean ModifyType(int i,user u){
 		 switch(i){
 		 case 1:
 			 u.type=state.fresh;
@@ -25,7 +31,7 @@ public class admin extends user{
 			 return false;	 
 		 }
 	 }
-	 public boolean ChangeGrade(int i,user s){
+	 public boolean ModifyGrade(int i,user s){
 		 switch(i){
 		 case 1:
 			 s.gr=grade.Brone;

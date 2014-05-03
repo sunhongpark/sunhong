@@ -11,13 +11,13 @@ public class customer<T> extends user {
 		super(id, pw, name, ph,address);
 		adres.put("기본 배송지",address);
 	}
-	public void addAdres(String key,String adr){
+	public void AddAdres(String key,String adr){
 		adres.put(key,adr);
 	}
-	public void removeAdres(String key){
+	public void RemoveAdres(String key){
 		adres.remove(key);
 	}
-	public void showAdres(){
+	public void ShowAdres(){
 		Set<String> keys=adres.keySet();
 		Iterator<String> i =keys.iterator();
 		while(i.hasNext()){
@@ -25,19 +25,23 @@ public class customer<T> extends user {
 			System.out.println(key+" "+adres.get(key));
 		}
 	}
-	public void Addshopping(Object ob){
+	public void print(){
+		super.Print();
+		this.ShowAdres();
+	}
+	public void AddShopping(Object ob){
 		shopping.add((T)ob);
 	}
-	public void showshopping(){
+	public void ShowShopping(){
 		//미구현 상품의 자세한 정보 출력
 	}
-	public void removeshopping(int i){
+	public void RemoveShopping(int i){
 		shopping.remove(i-1);
 	}
 	public void AddBuy(Object ob){
 		buy.add((T)ob);
 	}
-	public void showBuy(){
+	public void ShowBuy(){
 		//미구현 상품의 자세한 정보와 배송 상태를 출력
 	}
 	public void RemoveBuy(){

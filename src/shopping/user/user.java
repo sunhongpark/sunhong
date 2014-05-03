@@ -18,27 +18,35 @@ public class user {
 		 this.ph=ph;
 		 this.address=address;
 		 type=state.fresh;
+		 gr=grade.Silver;
 	 }
-	 
-	 public boolean checkpw(String pw){
+	 public void ModifyPh(String ph){
+		 this.ph=ph;
+	 }
+	 public void ModifyAdr(String adr){
+		 this.address=adr;
+	 }
+	 public void ModifyPw(String pw){
+		 this.pw=pw;
+	 }
+	 public boolean CheckPw(String pw){
 		if(this.pw.compareTo(pw)==0)
 			return true;
 		else return false;
 	 }
-	 public boolean checkid(String id){
-		 if(this.pw.compareTo(id)==0)
+	 public boolean CheckId(String id){
+		 if(this.id.compareTo(id)==0)
 			 return true;
 		 else return false;
 	 }
-	 public String getid(){return id;}
-	 public void setpw(String pw){
-		 if(checkpw(pw))
-			 this.pw=pw;
-		 else System.out.println("비밀번호가 일치 하지 않음");
-	 }
-	 public void changeaddress(String address){this.address=address;}
-	 public void print(){
-		 System.out.println("아이디 : "+id+"\n이름 : "+name+"\n전화 번호 : "+ph+"\n주소 : "+address+"\n등급 : "+type);
+	 public String GetId(){return id;}
+	 public void Print(){
+		 System.out.println("------------------------------");
+		 System.out.println("아이디 : "+id+"\n이름 : "+name+"\n전화 번호 : "+ph+
+				 "\n주소 : "+address+"\n상태 : "+type+"\n등급 :"+gr);
+		 if(login)
+			 System.out.println("로그인 중");
+		 else System.out.println("로그오프 중");
 	 }
 	
  }
