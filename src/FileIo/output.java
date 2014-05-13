@@ -7,7 +7,7 @@ import java.util.*;
 public class output {
 	static Scanner scan=new Scanner(System.in);
 	static ArrayList<product> list;
-	static ObjectOutputStream out;
+	static ObjectOutputStream out=null;
 	static public void add(){
 		String name;
 		int pay;
@@ -33,7 +33,9 @@ public class output {
 		product a;
 		for(int i=0;i<list.size();i++){
 			try {
-				out.writeObject(list.get(i));
+				a=list.get(i);
+				a.print();
+				out.writeObject(a);
 			} catch (IOException e) {
 				System.out.println("저장 오류");
 				e.printStackTrace();

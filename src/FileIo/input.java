@@ -5,13 +5,33 @@ package FileIo;
 import java.io.*;
 import java.util.*;
 public class input {
-	public static void main(String [] args) throws IOException, ClassNotFoundException{
-		ObjectInputStream in = 
-				new ObjectInputStream(new FileInputStream("d:\\object.ser"));
-		ArrayList<product> list=new ArrayList();
+	private static ObjectInputStream in;
+
+	public static void main(String [] args) {
+		try {
+			in = new ObjectInputStream(new FileInputStream("d:\\object.ser"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<product> list=new ArrayList<product>();
 		product c;
-		while((c=(product) in.readObject()) != null)
-			list.add(c);
+		try {
+			while((c=(product) in.readObject()) != null)
+			{
+				list.add(c);
+				System.out.print("1");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for(int i=0;i<list.size();i++)
 			list.get(i).print();
 	}
