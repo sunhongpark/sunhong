@@ -43,7 +43,7 @@ public class output {
 	public static void main(String[] args){
 		list=new ArrayList();
 		try {
-			out = new ObjectOutputStream(FileOutputStream("object.ser"));
+			out = new ObjectOutputStream(new FileOutputStream("d:\\object.ser"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

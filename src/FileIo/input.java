@@ -7,7 +7,7 @@ import java.util.*;
 public class input {
 	public static void main(String [] args) throws IOException, ClassNotFoundException{
 		ObjectInputStream in = 
-				new ObjectInputStream(new FileInputStream("c:\\object.text"));
+				new ObjectInputStream(new FileInputStream("d:\\object.ser"));
 		ArrayList<product> list=new ArrayList();
 		product c;
 		while((c=(product) in.readObject()) != null)
