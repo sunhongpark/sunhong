@@ -31,9 +31,10 @@ public class output {
 	}
 	static void save(){
 		product a;
-		for(int i=0;i<list.size();i++){
+		Iterator<product> it=list.iterator();
+		while(it.hasNext()){
 			try {
-				a=list.get(i);
+				a=it.next();
 				a.print();
 				out.writeObject(a);
 			} catch (IOException e) {
