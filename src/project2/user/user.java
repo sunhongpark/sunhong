@@ -21,5 +21,12 @@ public class user {
 		this.sex=sex;
 		this.grade=grade;
 	}
-	
+	public String getId(){return id;}
+	public String getPw(){return pw;}
+	public String getName(){return name;}
+	public int getType(){return type;}
+	public int getSex(){return sex;}
+	public int getGrade(){return grade;}
+	public String getNumber(){return number;}
+	public String getNumber2(){return number2;}
 }

@@ -19,10 +19,11 @@ public class account extends JFrame{
 	protected JPasswordField Tpw,Tnumber2;
 	protected ButtonGroup g1,g2;
 	protected JRadioButton customer,seller,M,W;
-	protected JButton ok,check;
-	protected boolean checkID=false;
+	protected JButton ok,check,check2;
+	protected boolean checkID=false,checknumber=false;
 	protected Connection conn;
 	protected userDB u =new userDB();
+	protected user user;
 	public account() {
 		size=Toolkit.getDefaultToolkit().getScreenSize();
 	}
@@ -66,8 +67,9 @@ public class account extends JFrame{
 		check.setSize(100,30);
 		check.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				String tmp="";
 				try {
-					if(u.checkID(Tid.getText()))
+					if(u.checkID(Tid.getText())/*&&Tid.getText().compareTo(tmp)!=0*/)
 					{
 						checkID=true;
 					JOptionPane.showMessageDialog(null, Tid.getText()+"사용 가능합니다");
@@ -129,6 +131,31 @@ public class account extends JFrame{
 		Tnumber2.setDocument(new JTextFieldLimit(7));
 		Tnumber2.setDocument(new checkint());
 		add(Tnumber2);
+		check2 =new JButton("중복 확인");
+		check2.setLocation(340, 230);
+		check2.setSize(100,30);
+		check2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String tmp="";
+				try {
+					if(u.checkNumber(Tnumber1.getText(),Tnumber2.getText())
+							/*&&Tnumber1.getText().compareTo(tmp)!=0*/)
+					{
+						checknumber=true;
+					JOptionPane.showMessageDialog(null, "사용가능 합니다");
+					}
+					else{
+						checknumber=false;
+						JOptionPane.showMessageDialog(null, "이미 사용중인 회원");
+					}
+				} catch (HeadlessException | ClassNotFoundException
+						| SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+			}
+		});
+		add(check2);
 		JLabel Lsex= new JLabel("성별 : ");
 		Lsex.setLocation(10, 270);
 		Lsex.setSize(100,30);
@@ -145,20 +172,39 @@ public class account extends JFrame{
 		add(ok);
 		ok.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(checkID)
+				int sex,grade,type;
+				if(checkID&&checknumber)
 				{
-					id=Tid.getText();
-					pw=Tpw.getText();
-					setVisible(false);
-					Tid.setText("");
-					Tpw.setText("");
-					Tname.setText("");
-					Tad.setText("");
-					Tnumber1.setText("");
-					Tnumber2.setText("");
-					customer.setSelected(true);
-					M.setSelected(true);
-					
+					if(customer.isSelected())
+						type=2;
+					else
+						type=3;
+					if(M.isSelected())
+						sex=1;
+					else
+						sex=2;
+					grade=1;
+					user = new user(Tid.getText(), Tpw.getText(), Tname.getText()
+							, type, Tnumber1.getText(), Tnumber2.getText(), sex, grade);
+					try {
+						if(u.addUser(user)){
+							setVisible(false);
+							Tid.setText("");
+							Tpw.setText("");
+							Tname.setText("");
+							Tad.setText("");
+							Tnumber1.setText("");
+							Tnumber2.setText("");
+							customer.setSelected(true);
+							M.setSelected(true);
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "아이디 생성 오류");
+						}
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else
 				{
