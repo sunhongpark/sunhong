@@ -1,7 +1,10 @@
 package project2;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
+
 import project2.user.*;
 public class home extends JFrame{
 	JLabel Lid,Lpw,Lloginid;
@@ -9,8 +12,11 @@ public class home extends JFrame{
 	JTextField Tid,Tpw,Tlogin;
 	account manager = new account();
 	Dimension size;
+	user u;
 	int x,y;
 	int xpos;
+	boolean check=false;
+	String type,grade;
 	public home(Dimension size){
 		this.size=size;
 		x=(int)((int)size.height*0.7);
@@ -41,7 +47,7 @@ public class home extends JFrame{
 		Lpw.setSize(30,30);
 		Lpw.setLocation(xpos-340, 30);
 		add(Lpw);
-		Tpw= new JTextField();
+		Tpw= new JPasswordField();
 		Tpw.setSize(80,30);
 		Tpw.setLocation(xpos-300, 30);
 		add(Tpw);
@@ -62,19 +68,42 @@ public class home extends JFrame{
 		logout.setLocation(xpos-230,30);
 		logout.setVisible(false);
 		add(logout);
+		Lloginid=new JLabel("");
+		Lloginid.setLocation(xpos-550, 30);
+		Lloginid.setSize(300, 30);
+		Lloginid.setVisible(false);
+		add(Lloginid);
 	}
 	private class buttonlistener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			Object source = e.getSource();
 			if(source==login){
-				login.setVisible(false);
-				account.setVisible(false);
-				Lid.setVisible(false);
-				Lpw.setVisible(false);
-				Tid.setVisible(false);
-				Tpw.setVisible(false);
-				logout.setVisible(true);
-				change.setVisible(true);
+				try {
+					if((u=manager.login(Tid.getText(),Tpw.getText()))!=null){
+						login.setVisible(false);
+						account.setVisible(false);
+						Lid.setVisible(false);
+						Lpw.setVisible(false);
+						Tid.setVisible(false);
+						Tpw.setVisible(false);
+						logout.setVisible(true);
+						change.setVisible(true);
+						if(u.getType()==1){
+							type="운영자";
+						}
+						else if(u.getType()==2){
+							type="회원";
+						}
+						else if(u.getType()==1){
+							type="판매자";
+						}
+						Lloginid.setText(u.getId()+"님 환영 합니다. 자격  : "+type);
+						Lloginid.setVisible(true);
+					}
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			if(source==logout){
 				login.setVisible(true);
@@ -85,9 +114,13 @@ public class home extends JFrame{
 				Tpw.setVisible(true);
 				logout.setVisible(false);
 				change.setVisible(false);
+				Lloginid.setVisible(false);
 			}
 			if(source==account){
 				manager.addAccount();
+			}
+			if(source==change){
+				manager.changeAccount(u);
 			}
 		}
 	}

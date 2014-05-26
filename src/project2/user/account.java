@@ -112,7 +112,7 @@ public class account extends JFrame{
 		add(Lad);
 		Tad= new JTextField();
 		Tad.setLocation(120,190);
-		Tad.setSize(100,30);
+		Tad.setSize(350,30);
 		add(Tad);
 		JLabel Lnumber= new JLabel("주민번호 : ");
 		Lnumber.setLocation(10, 230);
@@ -138,7 +138,7 @@ public class account extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				String tmp="";
 				try {
-					if(u.checkNumber(Tnumber1.getText(),Tnumber2.getText())
+					if(userDB.checkNumber(Tnumber1.getText(),Tnumber2.getText())
 							/*&&Tnumber1.getText().compareTo(tmp)!=0*/)
 					{
 						checknumber=true;
@@ -187,7 +187,7 @@ public class account extends JFrame{
 					user = new user(Tid.getText(), Tpw.getText(), Tname.getText()
 							, type, Tnumber1.getText(), Tnumber2.getText(), sex, grade);
 					try {
-						if(u.addUser(user)){
+						if(userDB.addUser(user)&&userDB.addaddress(Tid.getText(),Tad.getText(),"기본주소")){
 							setVisible(false);
 							Tid.setText("");
 							Tpw.setText("");
@@ -213,6 +213,21 @@ public class account extends JFrame{
 			}
 		});
 		setVisible(true);
+	}
+	public user login(String id,String pw) throws ClassNotFoundException, SQLException{
+		user tmp;
+		if((tmp=userDB.login(id, pw))!=null)
+		{
+			System.out.println("account ok");
+			return tmp;
+		}
+		else
+			return null;
+	}
+	public void changeAccount(user user){
+		Dmodify_user dialog = new Dmodify_user(this,user);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
 	}
 
 }

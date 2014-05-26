@@ -16,6 +16,15 @@ public class userDB {
 		Connection conn =DriverManager.getConnection(url,Did,Dpw);
 		return conn;
 	}
+	public static ResultSet findad(String id) throws ClassNotFoundException, SQLException{
+		sql="select *from address where id=\""+id+"\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		conn.close();
+		return re;
+	}
 	public static boolean checkID(String id) throws ClassNotFoundException, SQLException{
 		sql="select *from user where id=\""+id+"\"";
 		Connection conn=access();
@@ -64,7 +73,117 @@ public class userDB {
 			return false;
 		}
 	}
-	public static boolean addaddress(String id,String address,String type){
-		return true;
+	public static boolean addaddress(String id,String address,String type) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="insert into address values(\""+id+"\",\""+address+"\",\""
+				+type+"\");";
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static boolean deleteAddress(String id,String type) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="delete from address where id=\""+id+"\"&& type=\""+type+"\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static boolean memberLeave(String id) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="delete from address where id=\""+id+"\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		sql="delete from user where id=\""+id+"\";";
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static boolean modifyAddress(String id,String address,String type) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="update address set address =\""+address+"\" where id=\""+id+"\"&& type=\""+type+"\";";
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static boolean modifyPw(String id,String pw) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="update user set pw =\""+pw+"\" where id=\""+id+"\";";
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static user login(String id,String pw) throws ClassNotFoundException, SQLException{
+		sql="select *from user where id=\""+id+"\"&&pw=\""+pw+"\"";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		if(re.next()){
+			user u =new user(re.getString(1),re.getString(3),re.getString(4),re.getInt(2),
+					re.getString(5),re.getString(6),re.getInt(7),re.getInt(8));
+			System.out.println("DB ok");
+			conn.close();
+			return u;
+		}
+		else
+		{
+			conn.close();
+			return null;
+		}
+	}
+	public static ResultSet findAddress(String id) throws ClassNotFoundException, SQLException{
+		sql="select *from address where id=\""+id+"\"";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		return re;
+		
 	}
 }
