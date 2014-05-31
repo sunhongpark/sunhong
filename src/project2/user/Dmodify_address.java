@@ -59,7 +59,7 @@ public class Dmodify_address extends JDialog {
 	public Dmodify_address(JFrame JFrame,final String id) {
 		super(JFrame,"주소 변경 ",true);
 		setBounds(100, 100, 450, 300);
-		Object list[][] = new Object[10][3];
+		Object list[][] = new Object[5][3];
 		try {
 			ResultSet re=userDB.findAddress(id);
 			while(re.next()){

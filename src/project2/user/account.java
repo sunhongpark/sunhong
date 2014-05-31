@@ -24,8 +24,11 @@ public class account extends JFrame{
 	protected Connection conn;
 	protected userDB u =new userDB();
 	protected user user;
-	public account() {
+	protected home Home;
+	
+	public account(home Home) {
 		size=Toolkit.getDefaultToolkit().getScreenSize();
+		this.Home = Home;
 	}
 	public void addAccount(){
 		int x=(int)((int)size.height*0.5);
@@ -185,7 +188,7 @@ public class account extends JFrame{
 						sex=2;
 					grade=1;
 					user = new user(Tid.getText(), Tpw.getText(), Tname.getText()
-							, type, Tnumber1.getText(), Tnumber2.getText(), sex, grade);
+							, type, Tnumber1.getText(), Tnumber2.getText(), sex, grade,1);
 					try {
 						if(userDB.addUser(user)&&userDB.addaddress(Tid.getText(),Tad.getText(),"기본주소")){
 							setVisible(false);

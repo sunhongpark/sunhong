@@ -1,6 +1,7 @@
 package project2.user;
+import java.io.Serializable;
 import java.sql.*;
-public class user {
+public class user implements Serializable {
 	protected String id;
 	protected String pw;
 	protected String name;
@@ -9,9 +10,10 @@ public class user {
 	protected String number2;
 	protected int sex;
 	protected int grade;
+	protected int state;
 	
 	public user(String id,String pw,String name,int type,String number,
-			String number2,int sex,int grade){
+			String number2,int sex,int grade, int state){
 		this.id=id;
 		this.pw=pw;
 		this.name=name;
@@ -20,6 +22,7 @@ public class user {
 		this.number2=number2;
 		this.sex=sex;
 		this.grade=grade;
+		this.state=state;
 	}
 	public String getId(){return id;}
 	public String getPw(){return pw;}
@@ -29,4 +32,5 @@ public class user {
 	public int getGrade(){return grade;}
 	public String getNumber(){return number;}
 	public String getNumber2(){return number2;}
+	public int getState(){return state;}
 }

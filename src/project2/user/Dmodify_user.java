@@ -16,6 +16,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
+import project2.product.productDB;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -24,6 +26,7 @@ public class Dmodify_user extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JPasswordField passwordField;
+	public account Acc;
 
 	/**
 	 * Launch the application.
@@ -39,8 +42,9 @@ public class Dmodify_user extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Dmodify_user(final JFrame JFrame,final user user) {
-		super(JFrame,"회원 정보 수정",true);
+	public Dmodify_user(final account Acc,final user user) {
+		super((JFrame)Acc,"회원 정보 수정",true);
+		this.Acc = Acc;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,7 +98,7 @@ public class Dmodify_user extends JDialog {
 			JButton btnNewButton = new JButton("\uC8FC\uC18C \uBCC0\uACBD");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Dmodify_address dialog = new Dmodify_address(JFrame,user.getId());
+					Dmodify_address dialog = new Dmodify_address((JFrame)Acc,user.getId());
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				}
@@ -129,11 +133,17 @@ public class Dmodify_user extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						try {
+							if(user.getType()==3)
+							{
+								productDB.memberLeave(user.getId());
+							}
 							userDB.memberLeave(user.getId());
+							
 						} catch (ClassNotFoundException | SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						Acc.Home.bClick();
 						setVisible(false);
 					}
 				});

@@ -59,7 +59,8 @@ public class userDB {
 		int x;
 		sql="insert into user values(\""+u.getId()+"\","+u.type+",\""
 				+u.getPw()+"\",\""+u.getName()+"\",\""+u.getNumber()+"\",\""
-				+u.getNumber2()+"\","+u.getSex()+","+u.getGrade()+");";
+				+u.getNumber2()+"\","+u.getSex()+","+u.getGrade()+","+u.getState()+");";
+		System.out.println(sql);
 		Connection conn=access();
 		st=conn.createStatement();
 		x=st.executeUpdate(sql);
@@ -165,8 +166,10 @@ public class userDB {
 		st=conn.createStatement();
 		re=st.executeQuery(sql);
 		if(re.next()){
+			System.out.println(re.getString(1)+" "+re.getString(3)+" "+re.getString(4)+" "+re.getInt(2)+" "+
+					re.getString(5)+" "+re.getString(6)+" "+re.getInt(7)+" "+re.getInt(8)+" "+re.getInt(9));
 			user u =new user(re.getString(1),re.getString(3),re.getString(4),re.getInt(2),
-					re.getString(5),re.getString(6),re.getInt(7),re.getInt(8));
+					re.getString(5),re.getString(6),re.getInt(7),re.getInt(8),re.getInt(9));
 			System.out.println("DB ok");
 			conn.close();
 			return u;
@@ -178,12 +181,96 @@ public class userDB {
 		}
 	}
 	public static ResultSet findAddress(String id) throws ClassNotFoundException, SQLException{
-		sql="select *from address where id=\""+id+"\"";
+		sql="select *from address where id=\""+id+"\";";
 		System.out.println(sql);
 		Connection conn=access();
 		st=conn.createStatement();
 		re=st.executeQuery(sql);
+		//conn.close();
 		return re;
 		
 	}
+	public static ResultSet findAlluser() throws ClassNotFoundException, SQLException{
+		sql="select *from user;";
+		System.out.println(sql);
+		conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		//conn.close();
+		return re;
+		
+	}
+	public static ResultSet findActivityuser() throws ClassNotFoundException, SQLException{
+		sql="select *from user where state =\"1\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		//conn.close();
+		return re;	
+	}
+	public static ResultSet findBlockuser() throws ClassNotFoundException, SQLException{
+		sql="select *from user where state =\"2\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		//conn.close();
+		return re;
+		
+	}
+	public static ResultSet Alluser() throws ClassNotFoundException, SQLException{
+		sql="select *from user;";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		//conn.close();
+		return re;
+		
+	}
+	public static ResultSet Alladdress() throws ClassNotFoundException, SQLException{
+		sql="select *from address;";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		re=st.executeQuery(sql);
+		//conn.close();
+		return re;
+		
+	}
+	public static boolean modifyGrade(String id,int grade) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="update user set grade ="+grade+" where id=\""+id+"\";";
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	public static boolean modifyState(String id,int state) throws ClassNotFoundException, SQLException{
+		int x;
+		sql="update user set state ="+state+" where id=\""+id+"\";";
+		System.out.println(sql);
+		Connection conn=access();
+		st=conn.createStatement();
+		x=st.executeUpdate(sql);
+		if(x>0)
+		{
+			conn.close();
+			return true;
+		}
+		else{
+			conn.close();
+			return false;
+		}
+	}
+	
 }
