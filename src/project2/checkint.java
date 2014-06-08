@@ -13,5 +13,6 @@ public class checkint extends PlainDocument{
 		if (str == null)return;
 		if(str.charAt(0) >= '0' && str.charAt(0) <= '9')
 			super.insertString(offset, str, attr);
+		///
 		}
 	}

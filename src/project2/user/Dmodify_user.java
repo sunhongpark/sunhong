@@ -55,7 +55,7 @@ public class Dmodify_user extends JDialog {
 			contentPanel.add(LLID, "cell 0 1,alignx center");
 		}
 		{
-			JLabel LRID = new JLabel("abc");
+			JLabel LRID = new JLabel(user.getId());
 			contentPanel.add(LRID, "cell 1 1");
 		}
 		{
@@ -63,7 +63,7 @@ public class Dmodify_user extends JDialog {
 			contentPanel.add(Lname, "cell 0 2,alignx center");
 		}
 		{
-			JLabel LRname = new JLabel("\uBC15\uC120\uD64D");
+			JLabel LRname = new JLabel(user.getName());
 			contentPanel.add(LRname, "cell 1 2");
 		}
 		{
@@ -79,7 +79,7 @@ public class Dmodify_user extends JDialog {
 			contentPanel.add(Lnumber, "cell 0 4,alignx center");
 		}
 		{
-			JLabel lblNewLabel_1 = new JLabel("123456");
+			JLabel lblNewLabel_1 = new JLabel(user.getNumber());
 			contentPanel.add(lblNewLabel_1, "cell 1 4,alignx center,aligny center");
 		}
 		{
